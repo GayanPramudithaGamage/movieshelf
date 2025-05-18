@@ -63,7 +63,7 @@ The website is organized into several key sections:
 1. Clone the repository:
    ```bash
    git clone [repository-url]
-   cd MOVIELIB
+   cd movieshelf
    ```
 
 2. Install dependencies:

@@ -18,10 +18,10 @@
 import { ref } from 'vue'
 import { useMovieStore } from '../store/movieStore'
 
-const searchQuery = ref('') // Reactive variable for input value
+const searchQuery = ref('') 
 const movieStore = useMovieStore()
 
 const performSearch = () => {
-  movieStore.searchMovies(searchQuery.value) // Call the store action with the input value
+  movieStore.searchMovies(searchQuery.value) 
 }
 </script>

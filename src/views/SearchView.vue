@@ -1,5 +1,5 @@
 <script setup>
-import { computed,onUpdated, ref } from 'vue'
+import { computed, watchEffect, ref } from 'vue'
 import SearchBox from '../components/SearchBox.vue';
 import { useMovieStore } from '../store/movieStore.js';
 import MovieCard from '../components/MovieCard.vue';
@@ -35,10 +35,10 @@ const staticMovies = [
 
 const resultsContainer = ref(null)
 
-onUpdated(() => {
-  if (resultsContainer.value) {
+watchEffect(() => {
+  if (store.results.length && resultsContainer.value) {
     gsap.fromTo(
-      resultsContainer.value.querySelectorAll('#result-item'),
+      resultsContainer.value.querySelectorAll('.result-item'),
       {
         x: 200,
         opacity: 0,
@@ -46,7 +46,7 @@ onUpdated(() => {
       {
         x: 0,
         opacity: 1,
-        duration: 1.5,
+        duration: 1,
         stagger: 0.1,
         ease: 'power2.out',
       }
@@ -63,9 +63,9 @@ onUpdated(() => {
                 <SearchBox />
             </div>
             <div v-if="store.results.length" ref="resultsContainer">
-                <div class=" cursor-pointer" v-for="movie in store.results" :key="movie.id" @click="addMovie(movie)" >
-                    <div id="result-item" class="flex flex-row p-5 items-center">
-                        <img class="w-7 pr-2" src="../assets/icons/green-add-button.svg" alt="add button"/>
+                <div class="result-item" v-for="movie in store.results" :key="movie.id" @click="addMovie(movie)"  >
+                    <div  class="flex flex-row p-5 items-center cursor-pointer">
+                        <img class="w-7 pr-2" src="../assets/icons/green-add-button.svg" alt="add button" />
                         <div class="w-15"><img :src="movie.image" :alt="movie.name" v-if="movie.image" /></div>
                         <div class="px-5 text-white">{{ movie.name }}</div>
                     </div>

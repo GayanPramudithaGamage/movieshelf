@@ -26,7 +26,7 @@ export const useMovieStore = defineStore('movie', {
       {
         key: 'movie-store',
         storage: localStorage,
-        paths: ['selectedMovies'], // only persist this part
+        paths: ['selectedMovies'], 
       },
     ],
   },
